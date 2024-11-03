@@ -13,4 +13,11 @@ Solar Link no solo ayudará a reducir la huella ambiental, sino que también pro
 Por definir...
 
 ## Criterios de exito
- ### Facilidad de uso: 
+ ### Facilidad de uso
+ La aplicación es intuitiva, sencilla e implementa toda la información y odulos necesarios para el monitoreo y gestión de tu sistema de energía solar. 
+ ### Rapidez de respuesta
+ La aplicación garantiza datos en tiempo real lo más rápido posible y agilidad y velocidad para interactuar con tu sistema y los servicios que ofrecemos.
+ ### Precisión y confiabilidad
+ 
+ 
+ 

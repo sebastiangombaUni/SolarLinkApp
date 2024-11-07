@@ -10,7 +10,7 @@ export default function RootLayout() {
           headerTransparent: true,
         }}
       >
-        <Stack.Screen name="index" options={{ title: 'Inicio' }} />
+        <Stack.Screen name="index" options={{ title: 'Start' }} />
         <Stack.Screen name="getStarted" options={{ title: 'Getting Started' }} />
         {/* Cuando el usuario se loggea */}
         <Stack.Screen name="(tabs)" />

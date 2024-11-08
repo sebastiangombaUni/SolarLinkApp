@@ -1,3 +1,5 @@
+### Diseño en figma: https://www.figma.com/proto/pK8G6BbrSv43Ye2hl1bZ99/SolarLink-Support?node-id=0-1&t=PSG1IILdFDgmcmLZ-1
+
 # SolarLinkApp
 Repositorio del proyecto de SolarLinkApp. Desarrollo del proyecto, criterios, problemáticas en el proceso y más. Autores: Sebastian Gomez y Juan Esteban Rodríguez 
 

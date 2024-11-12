@@ -31,9 +31,11 @@ export default function getStarted() {
             <Text style={styles.buttonText}>Log in</Text>
           </Pressable>
           <Text style={{alignSelf: 'center', color: '#FFFFFF', paddingTop: 20}}>Or</Text>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Sign up</Text>
-          </Pressable>
+          <Link href="/signUp" asChild>  
+            <Pressable style={styles.button}>
+              <Text style={styles.buttonText}>Sign up</Text>
+            </Pressable>
+          </Link>
         </View>
     </View>
   );

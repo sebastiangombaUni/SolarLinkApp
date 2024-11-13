@@ -2,6 +2,11 @@ import { View, Text, TextInput, StyleSheet, Pressable, Alert } from 'react-nativ
 import React, { useContext, useState } from 'react';
 import { AuthContext } from "@/context/AuthContext/AuthContext";
 import { useRouter } from 'expo-router';
+import app from '@/utils/firebaseConfig';
+import { getAuth } from 'firebase/auth';
+
+const auth = getAuth(app);
+
 
 export default function SignUp() {
     const { signup } = useContext(AuthContext);

@@ -17,7 +17,7 @@ export default function GetStarted() {
 
     try {
       await login(email, password);
-      router.push('/tabs/home'); // Navegamos a la ruta correspondiente
+      router.push('/(tabs)/home'); // Navegamos a la ruta correspondiente
     } catch (error) {
       console.error("Login failed:", error);
       Alert.alert('Login failed', 'Invalid email or password. Please try again.');

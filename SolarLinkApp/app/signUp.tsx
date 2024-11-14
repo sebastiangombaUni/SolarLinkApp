@@ -31,7 +31,7 @@ export default function SignUp() {
         try {
             await signup(email, password1, name, lastname, username);
             Alert.alert('Success', 'User created successfully');
-            router.push('/tabs/home');
+            router.push('/(tabs)/home');
         } catch (error) {
             console.log(error);
             Alert.alert('Error', 'There has been a problem');

@@ -17,7 +17,7 @@ export default function _layout() {
                 <Tabs.Screen
                     name='home'
                     options={{
-                        title: "Home",
+                        title: "home",
                         tabBarIcon: ({ color }) => (<FontAwesome5 name="home" size={24} color={color} />)
                     }}
                 />

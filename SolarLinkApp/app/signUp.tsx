@@ -20,6 +20,7 @@ export default function SignUp() {
     };
 
     const handleSignup = async () => {
+        router.push('/tabs/home');
         if (!isEmailValid(email)) {
             Alert.alert('Error', 'Enter a valid Email');
             return;
@@ -33,6 +34,7 @@ export default function SignUp() {
         try {
             await signup(email, password1);
             Alert.alert('Success', 'User created successfully');
+            
         } catch (error) {
             console.log(error);
             Alert.alert('Error', 'There has been a problem');

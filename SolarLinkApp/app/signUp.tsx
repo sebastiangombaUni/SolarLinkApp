@@ -2,17 +2,15 @@ import { View, Text, TextInput, StyleSheet, Pressable, Alert } from 'react-nativ
 import React, { useContext, useState } from 'react';
 import { AuthContext } from "@/context/AuthContext/AuthContext";
 import { useRouter } from 'expo-router';
-import app from '@/utils/firebaseConfig';
-import { getAuth } from 'firebase/auth';
-
-const auth = getAuth(app);
-
 
 export default function SignUp() {
     const { signup } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [username, setUsername] = useState('');
     const router = useRouter();
 
     const isEmailValid = (email: string) => {
@@ -20,7 +18,6 @@ export default function SignUp() {
     };
 
     const handleSignup = async () => {
-        router.push('/tabs/home');
         if (!isEmailValid(email)) {
             Alert.alert('Error', 'Enter a valid Email');
             return;
@@ -32,9 +29,9 @@ export default function SignUp() {
         }
 
         try {
-            await signup(email, password1);
+            await signup(email, password1, name, lastname, username);
             Alert.alert('Success', 'User created successfully');
-            
+            router.push('/tabs/home');
         } catch (error) {
             console.log(error);
             Alert.alert('Error', 'There has been a problem');
@@ -48,6 +45,33 @@ export default function SignUp() {
             <View style={styles.formContainer}>
                 <Text style={styles.welcomeText}>Welcome.</Text>
                 
+                <Text style={styles.label}>Name</Text>
+                <TextInput 
+                    style={styles.input}
+                    placeholder="name"
+                    value={name}
+                    onChangeText={setName}
+                    placeholderTextColor="#6b7280"
+                />
+
+                <Text style={styles.label}>Last Name</Text>
+                <TextInput 
+                    style={styles.input}
+                    placeholder="last name"
+                    value={lastname}
+                    onChangeText={setLastname}
+                    placeholderTextColor="#6b7280"
+                />
+                
+                <Text style={styles.label}>Username</Text>
+                <TextInput 
+                    style={styles.input}
+                    placeholder="username"
+                    value={username}
+                    onChangeText={setUsername}
+                    placeholderTextColor="#6b7280"
+                />
+
                 <Text style={styles.label}>Email address</Text>
                 <TextInput 
                     style={styles.input}

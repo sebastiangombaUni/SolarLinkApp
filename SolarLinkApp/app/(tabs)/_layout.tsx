@@ -2,7 +2,7 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { DataProvider } from '@/context/datacontext/DataContext';
+import { DataProvider } from '@/context/DataContext/DataContext';
 
 
 export default function _layout() {

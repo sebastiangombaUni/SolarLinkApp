@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { dataReducer } from "./Datareducer";
+import { dataReducer } from "../DataContext/Datareducer";
 import { AuthContext } from "../AuthContext/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/utils/firebaseConfig";

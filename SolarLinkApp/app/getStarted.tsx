@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f2f5ea',
+    fontFamily: 'ShareTech-Regular'
   },
   title: {
     fontSize: 32,
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     color: '#2c363f',
     alignItems: 'center',
     marginBottom: 40,
+      
   },
   formContainer: {
     width: '100%',

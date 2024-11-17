@@ -36,11 +36,7 @@ const UserConsumption = () => {
       <Text style={styles.welcome}>¡Bienvenido, {userData.name}!</Text>
       <Text style={styles.subtitle}>Esto fueron sus costos mensuales:</Text>
 
-      {/* Historial de pagos */}
-      <View style={styles.historyContainer}>
-        <Text style={styles.historyTitle}>Historial de Pagos</Text>
-        <Text style={styles.noPaymentsText}>Ningún pago registrado.</Text>
-      </View>
+      
 
       {/* Contenedor del gráfico */}
       <View style={styles.chartContainer}>
@@ -54,6 +50,11 @@ const UserConsumption = () => {
             <Bar dataKey="energyUsage" fill="#6b5b95" />
           </BarChart>
         </ResponsiveContainer>
+      </View>
+      {/* Historial de pagos */}
+      <View style={styles.historyContainer}>
+        <Text style={styles.historyTitle}>Historial de Pagos</Text>
+        <Text style={styles.noPaymentsText}>Ningún pago registrado.</Text>
       </View>
 
       {/* Botones */}

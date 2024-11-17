@@ -7,7 +7,7 @@ import { DataContext } from "@/context/DataContext/DataContext";
 export default function RootLayout() {
   const {userData} = useContext(DataContext);
   if (!userData ) {
-    return <Text>Se cerro sesion.</Text>;
+    return <Text>Se cerró sesion.</Text>;
   }
 
   return (

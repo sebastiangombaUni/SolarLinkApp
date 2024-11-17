@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
     textAlign: "center", // Centra el texto
+    fontFamily: "ShareTech-Regular",
   },
   rightSection: {
     flexDirection: "row",

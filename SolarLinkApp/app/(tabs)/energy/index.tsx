@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f9f9f1',
     paddingTop: 20,
+    fontFamily: 'ShareTech-Regular',
   },
   tabContainer: {
     flexDirection: 'row',
@@ -192,10 +193,12 @@ const styles = StyleSheet.create({
   tabText: {
     color: '#000',
     fontWeight: '500',
+    fontFamily: 'ShareTech-Regular',
   },
   activeTabText: {
     color: '#6b5b95',
     fontWeight: '700',
+    fontFamily    : 'ShareTech-Regular',
   },
   summaryContainer: {
     flexDirection: 'column',
@@ -233,13 +236,15 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     color: '#333', // Darker text color
-  },
+    fontFamily: 'ShareTech-Regular',
+  },  
   
   summaryLabel: {
     fontSize: 14,
     color: '#757575', // Light gray for subtitle
     textTransform: 'uppercase',
     letterSpacing: 1,
+    fontFamily: 'ShareTech-Regular',
   },
   
   chartContainer: {

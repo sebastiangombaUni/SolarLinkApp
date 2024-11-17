@@ -75,12 +75,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f1',
     paddingTop: 20,
     paddingHorizontal: 20,
+    fontFamily: 'ShareTech-Regular',
   },
   welcome: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10,
+    fontFamily: 'ShareTech-Regular',
     color: '#6b5b95',
   },
   subtitle: {
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     color: '#4b4b4b',
+    fontFamily: 'ShareTech-Regular',
   },
   loadingText: {
     textAlign: 'center',
@@ -125,6 +128,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+    fontFamily: 'ShareTech-Regular',
   },
   historyContainer: {
     marginTop: 30,
@@ -135,10 +139,12 @@ const styles = StyleSheet.create({
     color: '#6b5b95',
     marginBottom: 10,
     textAlign: 'center',
+    fontFamily    : 'ShareTech-Regular',
   },
   noPaymentsText: {
     textAlign: 'center',
     color: '#4b4b4b',
+    fontFamily: 'ShareTech-Regular',
   },
 });
 

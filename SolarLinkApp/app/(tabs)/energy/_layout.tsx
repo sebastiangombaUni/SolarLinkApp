@@ -1,16 +1,22 @@
 import { Stack, Link } from "expo-router";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useContext } from "react";
+import { DataContext } from "@/context/DataContext/DataContext";
 
 export default function RootLayout() {
-  
+  const {userData} = useContext(DataContext);
+  if (!userData ) {
+    return <Text>Se cerro sesion.</Text>;
+  }
+
   return (
     <>
       <View style={styles.header}>
         {/* Izquierda: Logo y texto */}
         <View style={styles.leftSection}>
           <FontAwesome5 name="bolt" size={20} color="green" />
-          <Text style={styles.systemText}>Juanes System</Text>
+          <Text style={styles.systemText}>{userData.username} System</Text>
         </View>
 
         {/* Centro: SolarLink */}

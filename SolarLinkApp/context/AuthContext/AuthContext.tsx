@@ -10,10 +10,6 @@ const defaultValues: AuthState = {
     isLogged: false,
 };
 
-interface ConsumptionData {
-    name: string;
-    value: number;
-}
 
 interface AuthContextProps {
     state: any;
@@ -21,11 +17,7 @@ interface AuthContextProps {
     logout: () => Promise<void>;
     signup: (email: string, password: string, name: string, lastname: string, username: string) => Promise<void>;
     currentUserId: () => string | undefined;
-    loading: boolean;
-    hourlyData: ConsumptionData[];
-    weeklyData: ConsumptionData[];
-    monthlyData: ConsumptionData[];
-    fetchConsumptionData: () => Promise<void>;
+
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -34,62 +26,29 @@ export const AuthProvider = ({ children }: any) => {
     const auth = getAuth();
     const [user, setUser] = useState<any>(null);
     const [state, dispatch] = useReducer(authReducer, defaultValues);
-    const [hourlyData, setHourlyData] = useState<ConsumptionData[]>([]);
-    const [weeklyData, setWeeklyData] = useState<ConsumptionData[]>([]);
-    const [monthlyData, setMonthlyData] = useState<ConsumptionData[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
             if (currentUser) {
-                setUser(currentUser);
-                await fetchConsumptionData();
-                setLoading(false);
+                const docRef = doc(db, "Users", currentUser.uid);
+                const docSnap = await getDoc(docRef);
+    
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    dispatch({
+                        type: "LOGIN",
+                        payload: { ...currentUser, ...userData }, // Combina datos de Firebase Auth y Firestore
+                    });
+                }
             } else {
-                setUser(null);
-                setLoading(false);
+                dispatch({ type: "LOGOUT" });
             }
         });
-
+    
         return () => unsubscribe();
     }, []);
+    
 
-    const fetchConsumptionData = async () => {
-        if (!user) return;
-        const { uid } = user;
-        try {
-            const hoursCollectionRef = collection(db, 'Users', uid, 'ConsumoHoras');
-            const weekCollectionRef = collection(db, 'Users', uid, 'ConsumoSemanal');
-            const monthCollectionRef = collection(db, 'Users', uid, 'ConsumoMensual');
-
-            const [hourSnapshot, weekSnapshot, monthSnapshot] = await Promise.all([
-                getDocs(query(hoursCollectionRef)),
-                getDocs(query(weekCollectionRef)),
-                getDocs(query(monthCollectionRef)),
-            ]);
-
-            const hoursData = hourSnapshot.docs.map((doc) => ({
-                name: doc.data().hour,
-                value: doc.data().value,
-            }));
-
-            const weekData = weekSnapshot.docs.map((doc) => ({
-                name: doc.data().date,
-                value: doc.data().value,
-            }));
-
-            const monthData = monthSnapshot.docs.map((doc) => ({
-                name: doc.data().month,
-                value: doc.data().value,
-            }));
-
-            setHourlyData(hoursData);
-            setWeeklyData(weekData);
-            setMonthlyData(monthData);
-        } catch (error) {
-            console.error('Error al obtener los datos de Firestore:', error);
-        }
-    };
 
     const login = async (email: string, password: string) => {
         try {
@@ -169,11 +128,6 @@ export const AuthProvider = ({ children }: any) => {
             value={{
                 state,
                 logout,
-                fetchConsumptionData,
-                hourlyData,
-                weeklyData,
-                monthlyData,
-                loading,
                 login,
                 signup,
                 currentUserId: () => state.user?.uid

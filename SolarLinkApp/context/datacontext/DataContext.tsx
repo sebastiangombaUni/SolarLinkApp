@@ -1,118 +1,99 @@
-import React, { createContext, useContext, useReducer, useState, useEffect } from "react";
-import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
-import { db } from "@/utils/firebaseConfig";  // Ajusta la ruta según tu configuración de Firebase
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "../../utils/firebaseConfig";
+import { AuthContext } from "../AuthContext/AuthContext";
 
-// Tipos de datos que manejará el contexto
-export interface DataState {
-  user: any;  // Aquí puedes ajustar el tipo de usuario según tus necesidades
-  hourlyData: ConsumptionData[];
-  weeklyData: ConsumptionData[];
-  monthlyData: ConsumptionData[];
-  loading: boolean;
+
+interface UserData {
+    name: string;
+    lastname: string;
+    email: string;
+    username: string;
+    [key: string]: any;
 }
 
 interface ConsumptionData {
-  name: string;
-  value: number;
+    hourlyData: any[]; // Cambia `any` por un tipo más específico si conoces la estructura
+    weeklyData: any[];
+    monthlyData: any[];
 }
-
-const dataStateDefault: DataState = {
-  user: null,
-  hourlyData: [],
-  weeklyData: [],
-  monthlyData: [],
-  loading: true,
-};
-
-// Acción para actualizar el estado del usuario
-const SET_USER = 'setUser';
 
 interface DataContextProps {
-  state: DataState;
-  setUser: (user: any) => void;
-  fetchConsumptionData: () => void;
+    userData: UserData | null;
+    consumptionData: ConsumptionData | null;
+    isLoading: boolean;
 }
 
-export const DataContext = createContext({} as DataContextProps);
-
-// Reducer para manejar el estado del DataContext
-const dataReducer = (state: DataState, action: any): DataState => {
-  switch (action.type) {
-    case SET_USER:
-      return { ...state, user: action.payload, loading: false };
-    default:
-      return state;
-  }
-};
+export const DataContext = createContext<DataContextProps>({
+    userData: null,
+    consumptionData: null,
+    isLoading: true,
+});
 
 export const DataProvider = ({ children }: any) => {
-  const [state, dispatch] = useReducer(dataReducer, dataStateDefault);
-  const [loading, setLoading] = useState(true);  // Estado de carga adicional
+    const { state } = useContext(AuthContext); 
+    const [userData, setUserData] = useState<UserData | null>(null);
+    const [consumptionData, setConsumptionData] = useState<ConsumptionData | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-  // Función para obtener los datos de consumo de Firestore
-  const fetchConsumptionData = async () => {
-    if (!state.user) return;
-    const { uid } = state.user;
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (state.user) {
+                setIsLoading(true);
+                try {
+                    // Obtener datos del usuario
+                    const docRef = doc(db, "Users", state.user.uid);
+                    const docSnap = await getDoc(docRef);
 
-    try {
-      const hoursCollectionRef = collection(db, 'Users', uid, 'ConsumoHoras');
-      const weekCollectionRef = collection(db, 'Users', uid, 'ConsumoSemanal');
-      const monthCollectionRef = collection(db, 'Users', uid, 'ConsumoMensual');
+                    if (docSnap.exists()) {
+                        setUserData(docSnap.data() as UserData);
+                    } else {
+                        console.error("No se encontraron datos para este usuario.");
+                    }
 
-      const [hourSnapshot, weekSnapshot, monthSnapshot] = await Promise.all([
-        getDocs(query(hoursCollectionRef)),
-        getDocs(query(weekCollectionRef)),
-        getDocs(query(monthCollectionRef)),
-      ]);
+                    // Obtener datos de consumo
+                    const hourlyData: any[] = [];
+                    const weeklyData: any[] = [];
+                    const monthlyData: any[] = [];
 
-      const hoursData = hourSnapshot.docs.map((doc) => ({
-        name: doc.data().hour,
-        value: doc.data().value,
-      }));
+                    const hoursCollectionRef = collection(db, "Users", state.user.uid, "ConsumoHoras");
+                    const weekCollectionRef = collection(db, "Users", state.user.uid, "ConsumoSemanal");
+                    const monthCollectionRef = collection(db, "Users", state.user.uid, "ConsumoMensual");
 
-      const weekData = weekSnapshot.docs.map((doc) => ({
-        name: doc.data().date,
-        value: doc.data().value,
-      }));
+                    const hourlySnap = await getDocs(hoursCollectionRef);
+                    hourlySnap.forEach((doc) => {
+                        hourlyData.push(doc.data());
+                    });
 
-      const monthData = monthSnapshot.docs.map((doc) => ({
-        name: doc.data().month,
-        value: doc.data().value,
-      }));
+                    const weeklySnap = await getDocs(weekCollectionRef);
+                    weeklySnap.forEach((doc) => {
+                        weeklyData.push(doc.data());
+                    });
 
-      dispatch({ type: 'setConsumptionData', payload: { hoursData, weekData, monthData } });
-    } catch (error) {
-      console.error('Error al obtener los datos de Firestore:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+                    const monthlySnap = await getDocs(monthCollectionRef);
+                    monthlySnap.forEach((doc) => {
+                        monthlyData.push(doc.data());
+                    });
 
-  // Función para obtener los datos del usuario
-  const getUser = async () => {
-    if (state.user) {
-      try {
-        const userDoc = await getDoc(doc(db, "Users", state.user.uid));
-        if (userDoc.exists()) {
-          dispatch({ type: SET_USER, payload: userDoc.data() });
-        } else {
-          console.log("No se encontró el documento del usuario.");
-        }
-      } catch (error) {
-        console.log("Error al obtener los datos del usuario: ", error);
-      }
-    }
-  };
+                    setConsumptionData({ hourlyData, weeklyData, monthlyData });
+                } catch (error) {
+                    console.error("Error al obtener datos:", error);
+                } finally {
+                    setIsLoading(false);
+                }
+            } else {
+                setUserData(null);
+                setConsumptionData(null);
+                setIsLoading(false);
+            }
+        };
 
-  useEffect(() => {
-    if (state.user) {
-      fetchConsumptionData();  // Obtiene los datos de consumo cuando el usuario está disponible
-    }
-  }, [state.user]);
+        fetchUserData();
+    }, [state.user]);
 
-  return (
-    <DataContext.Provider value={{ state, setUser: getUser, fetchConsumptionData }}>
-      {children}
-    </DataContext.Provider>
-  );
+    return (
+        <DataContext.Provider value={{ userData, consumptionData, isLoading }}>
+            {children}
+        </DataContext.Provider>
+    );
 };

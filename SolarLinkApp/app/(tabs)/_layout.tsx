@@ -3,9 +3,11 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { DataProvider } from '@/context/DataContext/DataContext';
+import { AuthProvider } from '@/context/AuthContext/AuthContext';
 
 export default function _layout() {
   return (
+    <AuthProvider>
     <DataProvider>
       <View style={{ flex: 1, backgroundColor: '#f9f9f1' }}>
         <Tabs
@@ -64,5 +66,6 @@ export default function _layout() {
         </Tabs>
       </View>
     </DataProvider>
+    </AuthProvider>
   );
 }

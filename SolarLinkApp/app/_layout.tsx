@@ -1,9 +1,13 @@
 import { Stack } from "expo-router";
 import { AuthProvider } from "@/context/AuthContext/AuthContext";
+import React from "react";
+import { DataProvider } from "@/context/DataContext/DataContext";
 
 export default function RootLayout() {
   return (
     <AuthProvider>
+    <DataProvider>
+  
       <Stack
         screenOptions={{
           headerShown: false,
@@ -14,9 +18,10 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ title: 'Start' }} />
         <Stack.Screen name="getStarted" options={{ title: 'Getting Started' }} />
         <Stack.Screen name="signUp" options={{ title: 'Sign Up' }} />
-        {/* Cuando el usuario se loggea */}
+       
         <Stack.Screen name="(tabs)" />
       </Stack>
+      </DataProvider>
     </AuthProvider>
   );
 }

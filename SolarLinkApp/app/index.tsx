@@ -51,24 +51,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#f2f5ea',
+        fontFamily: 'ShareTech-Regular',
     },
     text: {
         fontSize: 28,
         lineHeight: 32,
-        fontFamily: 'ShareTech-Regular', // Aplica la fuente aquí
+        fontFamily: 'ShareTech-Regular', 
         alignContent: 'center',
     },
     text2: {
         fontSize: 28,
         lineHeight: 32,
-        fontFamily: 'ShareTech-Regular', // Aplica la fuente aquí también
+        fontFamily: 'ShareTech-Regular', 
         alignContent: 'center',
         color: '#957fef',
     },
     title: {
         fontSize: 32,
         fontWeight: 'bold',
-        fontFamily: 'ShareTech-Regular', // Aplica la fuente al título
+        fontFamily: 'ShareTech-Regular', 
         lineHeight: 32,
         color: '#2c363f',
         alignItems: 'center',
@@ -87,6 +88,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlignVertical: 'bottom',
         gap: 20,
-        fontFamily: 'ShareTech-Regular', // Aplica la fuente a los términos también
+        fontFamily: 'ShareTech-Regular', 
     },
 });

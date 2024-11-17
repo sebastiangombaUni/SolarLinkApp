@@ -29,6 +29,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f9f9f1', // Color de fondo fuera de la imagen
   },
   fullScreenImage: {
     flex: 1,
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     height: '75%',
     position: 'absolute',
     resizeMode: 'cover',
-    marginHorizontal: '-7.5%', 
+    marginHorizontal: '-7.5%',
     marginVertical: '15%',
   },
   overlayContainer: {
@@ -61,8 +62,6 @@ const styles = StyleSheet.create({
     top: '3%',
     left: '9%',
     transform: [{ translateY: 50 }],
- 
-    
   },
   lineSolar: {
     height: 120,
@@ -71,7 +70,6 @@ const styles = StyleSheet.create({
     transform: [{ translateY: 50 }],
   },
   lineBattery: {
-
     height: 180,
     bottom: '-2%',
     right: '32%',

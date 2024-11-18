@@ -11,7 +11,7 @@ export default function GetStarted() {
   
   const handleSignin = async () => {
     if (!email || !password) {
-      Alert.alert('Error', 'Email and password fields cannot be empty');
+      Alert.alert('Error', 'Email and password fieldws cannot be empty');
       return;
     }
 

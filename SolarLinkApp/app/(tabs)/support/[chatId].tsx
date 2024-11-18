@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, Button, ActivityIndicator, StyleSheet, Pressable } from 'react-native';
+import { View, Text, TextInput, FlatList, ActivityIndicator, StyleSheet, Pressable } from 'react-native';
 
 interface MessageProps {
     id: string;
@@ -8,7 +8,7 @@ interface MessageProps {
 }
 
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
-const API_KEY = 'AIzaSyB3aD4yq91IcpHBnI1kimF1-R92M0HMBcU'; // Asegúrate de reemplazarlo con tu clave real
+const API_KEY = 'AIzaSyALbys4R5EWpbx1JzW7M_yEqZsEDbZCO0Q'; // Asegúrate de reemplazarlo con tu clave real
 
 export default function Chat() {
     const [messages, setMessages] = useState<MessageProps[]>([]);
@@ -45,17 +45,21 @@ export default function Chat() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `${API_KEY}`,
                 },
                 body: JSON.stringify(body),
             });
 
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
             const data = await response.json();
 
-            console.log('Respuesta del servidor:', data); // Registro detallado de la respuesta
+            console.log('Raw server response:', JSON.stringify(data, null, 2));
 
             const botText =
-                data?.candidates?.[0]?.content?.text || "No response content received.";
-
+                data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response content received.";
 
             const botMessage: MessageProps = {
                 id: `${Date.now()}-bot`,
@@ -67,7 +71,6 @@ export default function Chat() {
         } catch (error) {
             console.error('Error al comunicar con Gemini:', error);
 
-            // Mensaje de error
             const errorMessage: MessageProps = {
                 id: `${Date.now()}-error`,
                 text: 'Error connecting to Gemini. Please try again later.',
@@ -97,9 +100,7 @@ export default function Chat() {
                 contentContainerStyle={{ paddingBottom: 100 }}
                 inverted
             />
-            
             {loading && <ActivityIndicator size="large" color="#0000ff" />}
-            
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
@@ -107,7 +108,12 @@ export default function Chat() {
                     value={message}
                     onChangeText={setMessage}
                 />
-                <Pressable style={{backgroundColor: '#957fef', padding: 10, borderRadius:40}} onPress={handleSendMessage} ><Text style={{fontFamily: 'ShareTech-Regular', color: 'white'}}>Enviar</Text></Pressable>
+                <Pressable
+                    style={{ backgroundColor: '#957fef', padding: 10, borderRadius: 40 }}
+                    onPress={handleSendMessage}
+                >
+                    <Text style={{ fontFamily: 'ShareTech-Regular', color: 'white' }}>Enviar</Text>
+                </Pressable>
             </View>
         </View>
     );

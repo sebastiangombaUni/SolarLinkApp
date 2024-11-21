@@ -12,7 +12,7 @@ export default function _layout() {
       <View style={{ flex: 1, backgroundColor: '#f9f9f1' }}>
         <Tabs
           screenOptions={{
-            tabBarActiveTintColor: '#957fef',
+            tabBarActiveTintColor: '#6b5b95',
             tabBarInactiveTintColor: 'gray',
             tabBarStyle: { backgroundColor: '#f9f9f1' },
             headerShown: false,

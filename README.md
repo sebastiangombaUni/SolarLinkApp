@@ -176,11 +176,79 @@ Falta de claridad sobre los beneficios de usar energía solar.
 
  
 
-## Requerimientos  
+## Requerimientos
+### Requerimientos Funcionales
 
-## Restricciones  
+#### Optimización del Consumo:
 
-## Riesgos (confidencialidad) 
+La aplicación debe analizar patrones de consumo y recomendar formas de optimización energética.
+Permitir control remoto de dispositivos conectados para reducir consumo innecesario.
+
+#### Visualización de datos en tiempo real:
+
+Mostrar ahorros económicos y consumo de manera clara y visual.
+Comparativas mensuales y anuales sobre eficiencia energética.
+
+### Requerimientos No Funcionales
+
+#### Interfaz de Usuario:
+
+La aplicación debe ser intuitiva, accesible y estar optimizada para dispositivos móviles.
+Al menos el 90% de los usuarios deben calificar la interfaz como fácil de usar.
+
+#### Rendimiento:
+
+La aplicación debe cargar en menos de 3 segundos en el 95% de las interacciones.
+Los datos de consumo y generación deben actualizarse en tiempo real, con un retraso máximo de 5 segundos.
+
+#### Compatibilidad:
+
+La app debe ser compatible con dispositivos Android e iOS.
+Debe funcionar en versiones mínimas de Android 8 y iOS 12.
+
+#### Seguridad:
+
+Los datos de los usuarios deben almacenarse de manera segura, cumpliendo con regulaciones como GDPR o CCPA si aplican.
+La autenticación debe realizarse a través de mecanismos seguros, como Firebase Authentication.
+
+## Restricciones
+
+#### Tecnológicas:
+
+La aplicación se desarrollará utilizando React Native para asegurar compatibilidad multiplataforma.
+El backend debe utilizar Firebase (Firestore, Authentication y Cloud Functions).
+
+#### Recursos:
+
+La cantidad de usuarios simultáneos no debe exceder la capacidad gratuita o limitada de Firebase.
+Los dispositivos deben contar con conexión a internet para acceder a funcionalidades en tiempo real.
+Dependencia del Hardware:
+
+Para funciones avanzadas, como control remoto de dispositivos, los dispositivos del hogar deben ser compatibles con IoT y permitir integración con la app.
+
+#### Conectividad:
+
+La mayoría de las funciones dependen de una conexión a internet. En modo offline, solo se debe permitir acceso al historial local y configuraciones básicas.
+
+## Riesgos
+
+#### Confidencialidad:
+
+Acceso no autorizado a información sensible del usuario (datos de consumo, información personal).
+Posibles brechas de seguridad en la transmisión de datos entre la app y Firebase.
+
+#### Disponibilidad:
+
+Caídas en los servicios de Firebase pueden interrumpir el acceso a datos en tiempo real.
+Dependencia de la conexión a internet para funciones críticas.
+Precisión de los Datos:
+
+Inexactitudes en la recolección o procesamiento de datos de consumo energético pueden generar desconfianza.
+Margen de error en las mediciones superiores al 2%.
+
+#### Regulaciones:
+
+El incumplimiento de regulaciones de privacidad y protección de datos podría resultar en sanciones legales o pérdida de reputación.
 
  
 

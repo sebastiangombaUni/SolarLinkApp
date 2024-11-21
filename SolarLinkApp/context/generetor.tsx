@@ -37,7 +37,7 @@ export function generateWeeklyData(): DailyConsumption[] {
       totalEnergyUsage: Math.floor(Math.random() * 7000), // Consumo total aleatorio del día entre 0 y 7000 watts
     });
   }
-  return weeklyData.reverse(); // Para que los días aparezcan en orden cronológico
+  return weeklyData.reverse(); // Para que los días aparezcan en orden cronológicohttp://localhost:8081/payments
 }
 
 // Función para generar datos por mes (3 meses)

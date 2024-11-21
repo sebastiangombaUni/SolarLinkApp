@@ -12,6 +12,36 @@ type MonthlyConsumption = {
   month: string; // Mes y año, Ej: "Nov 2024"
   totalEnergyUsage: number; // Consumo total en el mes en watts
 };
+type EnergyData = {
+  home: number; // Consumo en watts
+  solar: number; // Producción en watts
+  grid: number; // Consumo en watts
+  battery: number; // Consumo en watts
+  batteryLevel: number; // Nivel de batería en porcentaje
+};
+
+export function generateEnergyData(): EnergyData[] {
+  const realData: EnergyData[] = [];
+
+    const homeUsage = Math.floor(Math.random() * 500); // Consumo aleatorio entre 0 y 500 watts
+    const solarProduction = Math.floor(Math.random() * 6000); // Producción solar aleatoria entre 0 y 6000 watts
+    const gridUsage = Math.floor(Math.random() * 1000); // Consumo aleatorio entre 0 y 1000 watts
+    const batteryUsage = Math.floor(Math.random() * 1000); // Consumo aleatorio entre 0 y 1000 watts
+    const batteryLevel = Math.floor(Math.random() * 101); // Nivel de batería aleatorio entre 0 y 100%
+
+    realData.push({
+      home: homeUsage,
+      solar: solarProduction,
+      grid: gridUsage,
+      battery: batteryUsage,
+      batteryLevel: batteryLevel,
+    });
+  
+  
+  return realData;
+}
+
+
 
 // Función para generar datos por hora (24 horas en un día)
 export function generateHourlyData(): HourlyConsumption[] {
@@ -54,3 +84,4 @@ export function generateMonthlyData(): MonthlyConsumption[] {
   }
   return monthlyData.reverse(); // Para que los meses aparezcan en orden cronológico
 }
+

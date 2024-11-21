@@ -3,7 +3,8 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { authReducer, AuthState } from "./AuthReducer";
 import { auth, db } from "../../utils/firebaseConfig";
-import { generateHourlyData, generateMonthlyData, generateWeeklyData } from "../generetor";
+import { generateEnergyData, generateHourlyData, generateMonthlyData, generateWeeklyData } from "../generetor";
+
 
 const defaultValues: AuthState = {
     user: undefined,
@@ -97,6 +98,8 @@ export const AuthProvider = ({ children }: any) => {
             const hourlyData = generateHourlyData(); // 24 horas
             const weeklyData = generateWeeklyData(); // 7 días
             const monthlyData = generateMonthlyData(); // 3 meses
+            const realData = generateEnergyData(); // 3 meses
+            
 
             const hoursCollectionRef = collection(db, "Users", uid, "ConsumoHoras");
             for (const record of hourlyData) {
@@ -113,6 +116,12 @@ export const AuthProvider = ({ children }: any) => {
                 await setDoc(doc(monthCollectionRef), record);
             }
 
+            const realCollectionRef = collection(db, "Users", uid, "ConsumoReal");
+            for (const record of realData) {
+                await setDoc(doc(realCollectionRef), record);
+            }
+
+        
             dispatch({
                 type: "LOGIN",
                 payload: user,

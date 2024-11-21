@@ -1,9 +1,11 @@
-import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, ScrollView, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import { Stack, useRouter } from 'expo-router';
+import ModalCamera from '@/components/ModalCamera'; // Asegúrate de importar el modal QR
 
 export default function FAQ() {
-  const router = useRouter(); // Usamos el router para navegación
+  const router = useRouter();
+  const [isQRModalVisible, setQRModalVisible] = useState(false);
 
   const faqs = [
     {
@@ -28,9 +30,23 @@ export default function FAQ() {
     },
   ];
 
+  const handleQRScanned = (data: string) => {
+    console.log('Código QR escaneado:', data);
+    setQRModalVisible(false);
+    // Puedes manejar los datos escaneados aquí (redirigir, mostrar información, etc.)
+  };
+
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: "FAQ's" }} />
+      
+      {/* Modal para lector QR */}
+      <ModalCamera
+        isVisible={isQRModalVisible}
+        onClose={() => setQRModalVisible(false)}
+        onQRScanned={handleQRScanned}
+      />
+
       <ScrollView>
         {faqs.map((faq, index) => (
           <View key={index} style={styles.faqContainer}>
@@ -38,12 +54,24 @@ export default function FAQ() {
             <Text style={styles.answer}>{faq.answer}</Text>
           </View>
         ))}
-        <Pressable
-          style={styles.chatButton}
-          onPress={() => router.push('/support/${chatId}')} // Navegamos al componente del chat
-        >
-          <Text style={styles.chatButtonText}>Talk to us</Text>
-        </Pressable>
+
+        <View style={styles.buttonRow}>
+          {/* Botón "Talk to us" */}
+          <Pressable
+            style={styles.chatButton}
+            onPress={() => router.push('/support/${chatId}')}
+          >
+            <Text style={styles.chatButtonText}>Talk to us</Text>
+          </Pressable>
+
+          {/* Botón QR */}
+          <TouchableOpacity
+            style={styles.qrButton}
+            onPress={() => setQRModalVisible(true)}
+          >
+            <Text style={styles.qrButtonText}>QR</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -52,7 +80,7 @@ export default function FAQ() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f5ea', 
+    backgroundColor: '#f2f5ea',
     padding: 20,
   },
   faqContainer: {
@@ -76,10 +104,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
   },
-  chatButton: {
+  buttonRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 20,
-    marginHorizontal: '20%',
+  },
+  chatButton: {
+    flex: 1,
     paddingVertical: 15,
+    marginRight: 10,
     backgroundColor: '#957fef',
     borderRadius: 40,
     alignItems: 'center',
@@ -88,5 +122,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     fontFamily: 'ShareTech-Regular',
+  },
+  qrButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#957fef',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 5,
+  },
+  qrButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

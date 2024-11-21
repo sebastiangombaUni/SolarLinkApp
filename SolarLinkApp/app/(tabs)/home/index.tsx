@@ -5,7 +5,7 @@ import React, { useContext, useEffect } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { DataContext } from "@/context/DataContext/DataContext";
-import * as Notifications from "expo-notifications";
+import * as Notifications from "expo-notifications"
 
 
 export default function HomeScreen() {

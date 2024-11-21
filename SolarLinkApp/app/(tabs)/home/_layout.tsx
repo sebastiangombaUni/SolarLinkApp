@@ -1,4 +1,4 @@
-import { Stack, Link } from "expo-router";
+import { Stack, Link, useRouter } from "expo-router";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useContext } from "react";
@@ -6,6 +6,7 @@ import { DataContext } from "@/context/DataContext/DataContext";
 
 export default function RootLayout() {
   const {userData} = useContext(DataContext);
+  const router = useRouter();
   if (!userData ) {
     return <Text>Se cerró sesion.</Text>;
   }
@@ -25,12 +26,12 @@ export default function RootLayout() {
         {/* Derecha: Íconos */}
         <View style={styles.rightSection}>
          
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} >
               <FontAwesome5 name="bell" size={20} color="#333" />
             </TouchableOpacity>
       
          
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} onPress={() => router.push("/home/settings")}>
               <FontAwesome5 name="cog" size={20} color="#333" />
             </TouchableOpacity>
         
@@ -45,6 +46,12 @@ export default function RootLayout() {
         />
            <Stack.Screen
           name="weather"
+          options={{
+            headerShown: false, // Oculta el encabezado predeterminado
+          }}
+        />
+          <Stack.Screen
+          name="settings"
           options={{
             headerShown: false, // Oculta el encabezado predeterminado
           }}

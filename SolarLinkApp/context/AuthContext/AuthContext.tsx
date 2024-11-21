@@ -4,6 +4,7 @@ import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase
 import { authReducer, AuthState } from "./AuthReducer";
 import { auth, db } from "../../utils/firebaseConfig";
 import { generateEnergyData, generateHourlyData, generateMonthlyData, generateWeeklyData } from "../generetor";
+import { router } from "expo-router";
 
 
 const defaultValues: AuthState = {
@@ -68,6 +69,7 @@ export const AuthProvider = ({ children }: any) => {
         try {
             await auth.signOut();
             dispatch({ type: "LOGOUT" });
+            router.push("/getStarted");
         } catch (error) {
             console.error("Error durante el logout:", error);
             throw error;

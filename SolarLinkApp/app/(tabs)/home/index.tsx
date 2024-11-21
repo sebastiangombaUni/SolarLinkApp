@@ -4,23 +4,27 @@ import { ThemedText } from '@/components/ThemedText';
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../../assets/images/homeimage.png')}
-        style={styles.fullScreenImage}
-      />
-      <View style={styles.overlayContainer}>
-        <View style={[styles.line, styles.lineWindow]} />
-        <ThemedText style={[styles.text, { top: '10%', left: '10%' }]}>0.7kW HOME</ThemedText>
-        
-        <View style={[styles.line, styles.lineSolar]} />
-        <ThemedText style={[styles.text, { top: '10%', right: '25%' }]}>5.4kW SOLAR</ThemedText>
-        
-        <View style={[styles.line, styles.lineBattery]} />
-        <ThemedText style={[styles.text, { bottom: '6%', left: '40%' }]}>0kW GRID</ThemedText>
-        
-        <View style={[styles.line, styles.lineGrid]} />
-        <ThemedText style={[styles.text, { bottom: '6%', right: '20%' }]}>4.7kW</ThemedText>
-        <ThemedText style={[styles.text, { bottom: '4%', right: '20%' }]}>98% BL</ThemedText>
+      {/* Contenedor principal de la imagen */}
+      <View style={styles.imageContainer}>
+        <Image
+          source={require('../../../assets/images/homeimage.png')}
+          style={styles.fullScreenImage}
+        />
+        {/* Superposiciones sobre la imagen */}
+        <View style={styles.overlayContainer}>
+          <View style={[styles.line, styles.lineWindow]} />
+          <ThemedText style={[styles.text, { top: '13%', left: '12%' }]}>0.7kW HOME</ThemedText>
+
+          <View style={[styles.line, styles.lineSolar]} />
+          <ThemedText style={[styles.text, { top: '13%', right: '12%' }]}>5.4kW SOLAR</ThemedText>
+
+          <View style={[styles.line, styles.lineBattery]} />
+          <ThemedText style={[styles.text, { bottom: '10%', left: '38%' }]}>0kW GRID</ThemedText>
+
+          <View style={[styles.line, styles.lineGrid]} />
+          <ThemedText style={[styles.text, { bottom: '10%', right: '15%' }]}>4.7kW</ThemedText>
+          <ThemedText style={[styles.text, { bottom: '8%', right: '15%' }]}>98% BL</ThemedText>
+        </View>
       </View>
     </View>
   );
@@ -29,22 +33,26 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f1', // Color de fondo fuera de la imagen
-  },
-  fullScreenImage: {
-    flex: 1,
-    width: '85%',
-    height: '75%',
-    position: 'absolute',
-    resizeMode: 'cover',
-    marginHorizontal: '-7.5%',
-    marginVertical: '15%',
-  },
-  overlayContainer: {
-    flex: 1,
+    backgroundColor: '#f9f9f1',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+  },
+  imageContainer: {
+    flex: 1, // Permite que la imagen ocupe todo el espacio disponible
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fullScreenImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain', // Garantiza que la imagen no se recorte
+  },
+  overlayContainer: {
+    position: 'absolute', // Superpone los elementos sobre la imagen
+    width: '100%', // Coincide con el tamaño del contenedor
+    height: '100%',
   },
   text: {
     position: 'absolute',
@@ -58,27 +66,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   },
   lineWindow: {
-    height: 190,
-    top: '3%',
-    left: '9%',
-    transform: [{ translateY: 50 }],
+    height: '30%',
+    top: '15%',
+    left: '10%',
   },
   lineSolar: {
-    height: 120,
-    top: '3%',
-    right: '46%',
-    transform: [{ translateY: 50 }],
+    height: '15%',
+    top: '15%',
+    right: '40%',
   },
   lineBattery: {
-    height: 180,
-    bottom: '-2%',
-    right: '32%',
-    transform: [{ translateY: -50 }],
+    height: '15%',
+    bottom: '15%',
+    left: '50%',
   },
   lineGrid: {
-    height: 130,
-    bottom: '-1%',
-    left: '39%',
-    transform: [{ translateY: -50 }],
+    height: '15%',
+    bottom: '15%',
+    right: '25%',
   },
 });

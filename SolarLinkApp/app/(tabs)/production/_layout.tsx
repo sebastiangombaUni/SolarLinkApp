@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     backgroundColor: "#f9f9f1", 
+    marginTop: 60,
   },
   leftSection: {
     flexDirection: "row",
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
     textAlign: "center", // Centra el texto
+    fontFamily: "ShareTech-Regular",
   },
   rightSection: {
     flexDirection: "row",

@@ -8,7 +8,7 @@ interface MessageProps {
 }
 
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
-const API_KEY = 'AIzaSyALbys4R5EWpbx1JzW7M_yEqZsEDbZCO0Q'; // Asegúrate de reemplazarlo con tu clave real
+const API_KEY = 'AIzaSyB3aD4yq91IcpHBnI1kimF1-R92M0HMBcU'; // Asegúrate de reemplazarlo con tu clave real
 
 export default function Chat() {
     const [messages, setMessages] = useState<MessageProps[]>([]);
@@ -34,7 +34,7 @@ export default function Chat() {
                     {
                         parts: [
                             {
-                                text: message,
+                                text: message + "responde a esto como si fueras el chatbot soporte de una app llamada SolarLink de paneles solares",
                             },
                         ],
                     },

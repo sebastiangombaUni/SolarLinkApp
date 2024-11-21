@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, Pressable, StyleSheet, View, Text } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { DataContext } from "@/context/DataContext/DataContext";
-// Ajusta la ruta según la estructura de tu proyecto
+import { Link } from "expo-router";
 
 export default function HomeScreen() {
-  // Obtener datos del contexto
   const { consumoReal, isLoading } = useContext(DataContext);
 
-  // Mostrar un indicador de carga mientras se obtienen los datos
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
@@ -51,6 +49,16 @@ export default function HomeScreen() {
           </ThemedText>
         </View>
       </View>
+
+      {/* Botón circular para ir a la pantalla Weather */}
+      <Link href="/(tabs)/home/weather" asChild>
+        <Pressable style={styles.weatherButton}>
+          <Image
+            source={require("../../../assets/images/weather.png")} // Asegúrate de tener esta imagen en tus assets
+            style={styles.weatherIcon}
+          />
+        </Pressable>
+      </Link>
     </View>
   );
 }
@@ -120,5 +128,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "gray",
     fontWeight: "bold",
+  },
+  weatherButton: {
+    position: "absolute",
+    bottom: 30,
+    right: '80%',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#6b5b95",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  weatherIcon: {
+    width: 30,
+    height: 30,
+    tintColor: "#fff",
   },
 });

@@ -7,7 +7,7 @@ import { DataContext } from "@/context/DataContext/DataContext";
 export default function RootLayout() {
   const {userData} = useContext(DataContext);
   if (!userData ) {
-    return <Text>Se cerro sesion.</Text>;
+    return <Text>Se cerró sesion.</Text>;
   }
 
   return (
@@ -43,6 +43,12 @@ export default function RootLayout() {
             headerShown: false, // Oculta el encabezado predeterminado
           }}
         />
+           <Stack.Screen
+          name="weather"
+          options={{
+            headerShown: false, // Oculta el encabezado predeterminado
+          }}
+        />
       </Stack>
     </>
   );
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#f9f9f1", 
     marginTop: 60,
-   
+    fontFamily: "ShareTech-Regular",
   },
   leftSection: {
     flexDirection: "row",
@@ -72,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#333",
-    textAlign: "center", 
+    textAlign: "center", // Centra el texto
     fontFamily: "ShareTech-Regular",
   },
   rightSection: {

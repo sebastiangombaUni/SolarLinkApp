@@ -44,7 +44,7 @@ export default function HomeScreen() {
   useEffect(() => {
     if (!consumoReal) return;
 
-    if (consumoReal.batteryLevel < 30) {
+    if (consumoReal.batteryLevel < 30 && consumoReal.batteryLevel > 10) {
       sendNotification(
         "Alerta de Batería Baja",
         "El nivel de la batería es inferior al 30%. Por favor, revisa tu sistema."

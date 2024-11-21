@@ -33,8 +33,8 @@ export default function SignUp() {
             Alert.alert('Success', 'User created successfully');
             router.push('/(tabs)/home');
         } catch (error) {
-            console.log(error);
-            Alert.alert('Error', 'There has been a problem');
+            //console.log(error);
+            //Alert.alert('Error', 'There has been a problem');
         }
     };
 

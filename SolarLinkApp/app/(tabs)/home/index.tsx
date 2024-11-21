@@ -1,11 +1,79 @@
-import React, { useContext } from "react";
-import { Image, Pressable, StyleSheet, View, Text } from "react-native";
+
+
+import { Link } from "expo-router";
+import React, { useContext, useEffect } from "react";
+import { Image, Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { DataContext } from "@/context/DataContext/DataContext";
-import { Link } from "expo-router";
+import * as Notifications from "expo-notifications";
+
 
 export default function HomeScreen() {
   const { consumoReal, isLoading } = useContext(DataContext);
+  // Solicitar permisos de notificaciones
+  useEffect(() => {
+    const requestPermissions = async () => {
+      const { status } = await Notifications.getPermissionsAsync();
+      if (status !== "granted") {
+        await Notifications.requestPermissionsAsync();
+      }
+    };
+    requestPermissions();
+
+    // Configurar el handler de notificaciones
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+      }),
+    });
+  }, []);
+
+  // Enviar notificaciones locales
+  const sendNotification = async (title: string, body: string) => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title,
+        body,
+        sound: true,
+      },
+      trigger: null, // para enviar de una 
+    
+    });
+  };
+
+  
+  useEffect(() => {
+    if (!consumoReal) return;
+
+    if (consumoReal.batteryLevel < 30 && consumoReal.batteryLevel > 10) {
+      sendNotification(
+        "Alerta de Batería Baja",
+        "El nivel de la batería es inferior al 30%. Por favor, revisa tu sistema."
+      );
+    }
+    if (consumoReal.batteryLevel < 10) {
+      sendNotification(
+        "Alerta de Batería Critica",
+        "El nivel de la batería es inferior al 10%. Por favor, revisa tu sistema."
+      );
+    }
+
+    if (consumoReal.home > consumoReal.solar) {
+      sendNotification(
+        "Consumo Superior",
+        "El consumo del hogar es mayor que el nivel de la batería."
+      );
+    }
+
+    if (consumoReal.grid < 100) {
+      sendNotification(
+        "Mantenimiento Requerido",
+        "El nivel del grid es inferior a 100. Se recomienda realizar un mantenimiento."
+      );
+    }
+  }, [consumoReal]);
 
   if (isLoading) {
     return (

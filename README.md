@@ -60,21 +60,21 @@ Respuestas rápidas a preguntas sobre optimización y mantenimiento.
 
 ## Criterios de éxito: 
 
-### Facilidad de uso: Lograr que al menos el 90% de los usuarios califiquen la interfaz como intuitiva y fácil de usar en encuestas de satisfacción. 
+Facilidad de uso: Lograr que al menos el 90% de los usuarios califiquen la interfaz como intuitiva y fácil de usar en encuestas de satisfacción. 
 
-### Tiempo de carga: Asegurar que el tiempo de carga de la aplicación no exceda los 3 segundos en el 95% de las interacciones. 
+Tiempo de carga: Asegurar que el tiempo de carga de la aplicación no exceda los 3 segundos en el 95% de las interacciones. 
 
-### Actualización de datos en tiempo real: Refrescar los datos de consumo y generación de energía en menos de 5 segundos, para asegurar que el usuario siempre tenga información actualizada. 
+Actualización de datos en tiempo real: Refrescar los datos de consumo y generación de energía en menos de 5 segundos, para asegurar que el usuario siempre tenga información actualizada. 
 
-### Precisión del monitoreo: Mantener una precisión en los datos de consumo y generación de energía con un margen de error inferior al 2%. 
+Precisión del monitoreo: Mantener una precisión en los datos de consumo y generación de energía con un margen de error inferior al 2%. 
 
-### Entrega oportuna: Enviar la notificación de pago al menos 7 días antes de la fecha de vencimiento de la factura y enviar recordatorios adicionales 3 días y 1 día antes, si el pago aún no se ha realizado. 
+Entrega oportuna: Enviar la notificación de pago al menos 7 días antes de la fecha de vencimiento de la factura y enviar recordatorios adicionales 3 días y 1 día antes, si el pago aún no se ha realizado. 
 
-### Confirmación de entrega: Asegurar que el 95% de las notificaciones lleguen exitosamente a los usuarios, sin retrasos. 
+Confirmación de entrega: Asegurar que el 95% de las notificaciones lleguen exitosamente a los usuarios, sin retrasos. 
 
-Historias de Usuario (Necesidades y Dolores) 
+## Historias de Usuario (Necesidades y Dolores) 
 
-Monitoreo del Consumo Energético 
+### Monitoreo del Consumo Energético 
 
 Historia: 
 
@@ -99,8 +99,7 @@ Dificultad para monitorear el consumo en tiempo real y optimizar el uso de energ
 Falta de notificaciones oportunas sobre problemas técnicos o rendimiento del sistema. 
 
  
-
-Notificaciones de Factura 
+### Notificaciones de Factura 
 
 Historia: 
 
@@ -115,8 +114,7 @@ Dolor:
 Cargos adicionales o desconexión del servicio por olvidar el pago. 
 
  
-
-Notificaciones de Fallas del Sistema 
+### Notificaciones de Fallas del Sistema 
 
 Historia: 
 
@@ -131,24 +129,7 @@ Dolor:
 Pérdida de energía o daños por no detectar problemas a tiempo. 
 
  
-
-Control Remoto de Dispositivos 
-
-Historia: 
-
-"Como usuario, quiero controlar ciertos dispositivos desde la app de SolarLink, para reducir el consumo cuando no los necesito." 
-
-Necesidad: 
-
-Control remoto de dispositivos conectados para optimizar el consumo energético. 
-
-Dolor: 
-
-Incremento en costos por dispositivos activos innecesariamente. 
-
- 
-
-Comparación de Consumo 
+### Comparación de Consumo 
 
 Historia: 
 
@@ -163,8 +144,7 @@ Dolor:
 Dificultad para medir la efectividad de las estrategias de ahorro. 
 
  
-
-Acceso a Soporte Técnico 
+### Acceso a Soporte Técnico 
 
 Historia: 
 
@@ -180,7 +160,7 @@ Frustración por depender de canales externos para obtener soporte.
 
  
 
-Información sobre Ahorros Económicos y Ambientales 
+### Información sobre Ahorros Económicos y Ambientales 
 
 Historia: 
 

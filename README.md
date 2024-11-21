@@ -1,3 +1,6 @@
+Diseño en Figma: https://www.figma.com/proto/pK8G6BbrSv43Ye2hl1bZ99/SolarLink-Support?node-id=0-1&t=55LjBuQ9nSdK6tKv-1
+ 
+ 
  # SolarLink Support 
 
  
@@ -251,5 +254,32 @@ Margen de error en las mediciones superiores al 2%.
 El incumplimiento de regulaciones de privacidad y protección de datos podría resultar en sanciones legales o pérdida de reputación.
 
  
-
+# Librerías utilizadas: 
+## Librerías Principales
+react
+react-native
+expo
+expo-router
+## Librerías para Navegación
+expo-router
+@react-navigation/native
+## Librerías para Firebase
+firebase (Firestore, Authentication)
+## Librerías de Expo
+expo-notifications
+expo-device
+expo-permissions
+expo-camera
+expo-barcode-scanner
+expo-image-picker
+expo-image-manipulator
+## Librerías para Manejo de Estado
+zustand (opcional)
+## Librerías para UI y Estilo
+@expo/vector-icons
+react-native-paper 
+## Librerías para Fechas
+date-fns
+## Librerías para Gráficas
+react-native-chart-kit
  
